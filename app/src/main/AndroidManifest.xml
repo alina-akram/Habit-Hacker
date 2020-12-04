@@ -14,12 +14,18 @@
             android:label="@string/title_activity_add_habit"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".SplashScreen" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SettingActivity"/>
+        <receiver android:name=".Mote" />
+        <activity android:name=".EditHabitActivity"/>
     </application>
 
 </manifest>

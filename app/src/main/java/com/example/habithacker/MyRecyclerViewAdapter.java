@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
@@ -30,11 +31,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Habit habit = mData.get(position);
-            //HERE
-            holder.textName.setText(""+habit.getName());
-            holder.textDesc.setText(""+habit.getDescription());
-            holder.textDesc.setText(""+habit.getFrequency());
-            holder.textDesc.setText(""+habit.getProgress());
+
+            holder.textName.setText(habit.getName());
+            holder.textDesc.setText(habit.getDescription());
+            holder.textFreq.setText(habit.getFrequency());
+            holder.textProg.setText(habit.getProgress());
         }
 
         // total number of rows
@@ -46,10 +47,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         // stores and recycles views as they are scrolled off screen
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
-            TextView textName; //add four more of these/with diff var names
+            TextView textName;
             TextView textDesc;
             TextView textFreq;
             TextView textProg;
+            Button deleteButton;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -58,6 +60,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 textDesc = itemView.findViewById(R.id.textDesc);
                 textFreq = itemView.findViewById(R.id.textFreq);
                 textProg = itemView.findViewById(R.id.textProg);
+                deleteButton = itemView.findViewById(R.id.deleteButton);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mClickListener != null)
+                            mClickListener.onDeleteClick(view, getAdapterPosition());
+                    }
+                });
+
                 itemView.setOnLongClickListener(this);
             }
 
@@ -73,7 +84,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             return mData.get(id);
         }
 
-        // allows clicks events to be caught
+        // clicks events to be caught
         void setClickListener(ItemClickListener itemClickListener) {
             this.mClickListener = itemClickListener;
         }
@@ -81,6 +92,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         // parent activity will implement this method to respond to click events
         public interface ItemClickListener {
             void onItemClick(View view, int position);
+            void onDeleteClick(View view, int position);
         }
     }
 

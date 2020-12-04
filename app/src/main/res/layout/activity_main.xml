@@ -17,14 +17,24 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:text="Add"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settingButton"
+        />
+
+    <Button
+        android:id="@+id/settingButton"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:text="Setting"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="addHabit"
         />
 
 

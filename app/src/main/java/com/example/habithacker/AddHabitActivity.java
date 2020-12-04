@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import java.lang.String;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,30 +36,33 @@ public class AddHabitActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // check whether eveyrthing is filled.
-                // editProg.getText().toString.isEmpty();
-                if(if any field is empty);
+                // check whether everything is filled or not
+                if (editHabitName.getText().toString().isEmpty() || editDesc.getText().toString().isEmpty() || editFreq.getText().toString().isEmpty()
+                        || editProg.getText().toString().isEmpty()) {
                     showToast("Please fill every section");
-                    return;
 
+                    return;
+                }
 
                 close();
-            }
-        });
 
+            }
+
+
+        });
     }
 
     public void showToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
+    // close the activity and return name, description, frequency and progress information
     public void close(){
         Intent intent = new Intent();
         intent.putExtra("NAME", editHabitName.getText().toString());
         intent.putExtra("DESC", editDesc.getText().toString());
         intent.putExtra("FREQ", editFreq.getText().toString());
         intent.putExtra("PROG", editProg.getText().toString());
-        //HERE
         setResult(RESULT_OK, intent);
         finish();
     }
